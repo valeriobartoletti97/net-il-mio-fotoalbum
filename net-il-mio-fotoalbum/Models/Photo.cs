@@ -21,5 +21,11 @@ namespace net_il_mio_fotoalbum.Models
         {
 
         }
+        public Photo(string title, string description, string image)
+        {
+            this.Title = title;
+            this.Description = description;
+            this.Image = image;
+        }
     }
 }

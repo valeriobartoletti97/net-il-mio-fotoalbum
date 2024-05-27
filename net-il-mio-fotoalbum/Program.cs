@@ -1,3 +1,8 @@
+using net_il_mio_fotoalbum.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -23,5 +28,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+PhotoManager.SeedCategories();
+PhotoManager.SeedPhotos();
 
 app.Run();
