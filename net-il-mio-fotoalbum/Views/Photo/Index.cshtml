@@ -1,0 +1,30 @@
+﻿<!-- INDEX -->
+@using net_il_mio_fotoalbum.Data
+@model List<Photo>
+
+<div class="text-center pt-5 pb-2">
+    <h2 class="text-uppercase fw-bold">Photo</h2>
+</div>
+<div class="container pt-2" id="main-content">
+   <div class="row justify-cointent-center">
+        @* CARD *@
+        @foreach (Photo photo in @Model)
+        {
+            <div class="col-md-4 mb-3 d-flex">
+                <div class="card photo-card flex-fill">
+                    <div class="photo-wrapper">
+                        <img src="~/img/@photo.Image" alt="photo.Name" class="photo-img" />
+                    </div>
+                    <div class="card-body">
+                        <h3 class="text-center photo-title py-1">@photo.Title</h3>
+                        <p class="text-center my-4">@photo.Description</p>
+                        @* <div class="text-center items-prop py-1 mb-2">
+                            Categoria
+                            </div>
+                            *@
+                     </div>
+                </div>
+            </div>
+        }
+   </div>
+</div>

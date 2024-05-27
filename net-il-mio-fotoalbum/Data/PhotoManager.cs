@@ -7,6 +7,11 @@ namespace net_il_mio_fotoalbum.Data
 {
     public static class PhotoManager
     {
+        public static List<Photo> GetAllPhotos()
+        {
+            using PhotoContext db = new PhotoContext();
+            return db.Photos.Include(p => p.Categories).ToList();
+        }
         public static void AddPhoto(Photo photo, List<string>? selectedCategories = null)
         {
             using PhotoContext db = new PhotoContext();
