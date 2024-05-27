@@ -22,6 +22,26 @@
                             Categoria
                             </div>
                             *@
+                        <div class="d-flex justify-content-center gap-1">
+                            <span>
+                                <a href="@Url.Action("GetPhoto", "Photo", new { id = photo.Id})">
+                                    <i class="fa-solid fa-eye show-icon"></i>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="@Url.Action("Update", "Photo", new { id = photo.Id})">
+                                    <i class="fa-solid fa-pen update-icon"></i>
+                                </a>
+                            </span>
+                            <div class="delete-pizza-btn">
+                                <form asp-controller="Photo" asp-action="Delete" asp-route-id="@photo.Id" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit">
+                                        <i class="fa-solid fa-trash delete-icon"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                      </div>
                 </div>
             </div>

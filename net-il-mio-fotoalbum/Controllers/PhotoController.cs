@@ -2,6 +2,7 @@
 using net_il_mio_fotoalbum.Models;
 using System.Diagnostics;
 using net_il_mio_fotoalbum.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace net_il_mio_fotoalbum.Controllers
 {
@@ -41,6 +42,16 @@ namespace net_il_mio_fotoalbum.Controllers
             }
             PhotoManager.AddPhoto(data.Photo, data.SelectedCategories);
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            if (PhotoManager.DeletePhoto(id))
+                return RedirectToAction("Index");
+            else
+                return NotFound();
         }
     }
 }

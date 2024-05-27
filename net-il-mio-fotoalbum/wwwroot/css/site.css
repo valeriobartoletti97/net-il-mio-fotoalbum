@@ -72,3 +72,29 @@ a:hover {
     transform: scale(1.05);
     cursor: pointer
 }
+
+
+.show-icon, .update-icon {
+    background-color: white;
+    color: black;
+}
+
+.show-icon, .go-back-icon, .update-icon, .delete-icon {
+    padding: 7px;
+    border-radius: 2px;
+    font-size: 1.05em
+}
+
+.show-icon:hover, .go-back-icon:hover, .update-icon:hover, .delete-icon:hover {
+    transform: scale(1.05);
+    transition: 1s;
+    cursor: pointer;
+}
+
+.delete-icon {
+    background-color: white;
+    color: black;
+}
+button{
+    border:0;
+}

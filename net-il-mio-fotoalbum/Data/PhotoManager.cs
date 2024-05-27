@@ -17,6 +17,11 @@ namespace net_il_mio_fotoalbum.Data
             using PhotoContext db = new PhotoContext();
             return db.Categories.ToList();
         }
+        public static Photo GetPhoto(int id)
+        {
+            using PhotoContext db = new PhotoContext();
+            return db.Photos.FirstOrDefault(p => p.Id == id);
+        }
         public static void AddPhoto(Photo photo, List<string> selectedCategories)
         {
             using PhotoContext db = new PhotoContext();
@@ -55,6 +60,19 @@ namespace net_il_mio_fotoalbum.Data
             return db.Categories.Count();
         }
       
+        public static bool DeletePhoto(int id)
+        {
+            using PhotoContext db = new PhotoContext();
+            var pizza = PhotoManager.GetPhoto(id);
+
+            if (pizza == null)
+                return false;
+
+            db.Photos.Remove(pizza);
+            db.SaveChanges();
+
+            return true;
+        }
         public static void SeedPhotos()
         {
             if (CountAllPhotos() == 0)
