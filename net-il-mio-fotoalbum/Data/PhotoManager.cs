@@ -17,9 +17,22 @@ namespace net_il_mio_fotoalbum.Data
             using PhotoContext db = new PhotoContext();
             return db.Categories.ToList();
         }
-        public static void AddPhoto(Photo photo)
+        public static void AddPhoto(Photo photo, List<string> selectedCategories)
         {
             using PhotoContext db = new PhotoContext();
+            photo.Categories = new List<Category>();
+            if(selectedCategories != null)
+            {
+                foreach (var ingredient in selectedCategories)
+                {
+                    int id = int.Parse(ingredient);
+                    var ingredientDB = db.Categories.FirstOrDefault(p => p.Id == id);
+                    if (ingredientDB != null)
+                    {
+                        photo.Categories.Add(ingredientDB);
+                    }
+                }
+            }
             db.Photos.Add(photo);
             db.SaveChanges();
         }
@@ -46,13 +59,13 @@ namespace net_il_mio_fotoalbum.Data
         {
             if (CountAllPhotos() == 0)
             {
-                PhotoManager.AddPhoto(new Photo("Bajau Boy", "Un bambino bajau sorride, seduto su una piccola barca di legno, circondato dall'azzurro brillante del mare cristallino.", "bajau_boy.jpg"));
-                PhotoManager.AddPhoto(new Photo("Rock Splash", "Un imponente scoglio emerge dal mare, mentre onde vigorose si infrangono contro di esso, spruzzando acqua scintillante tutt'intorno.", "brandung_im_meer_an_felsen.jpg"));
-                PhotoManager.AddPhoto(new Photo("Cosmic Micro", "Una miriade di galassie, catturate al microscopio, si dispongono in intricate formazioni, brillando come gioielli nel vasto universo.", "das_pferd_am_himmel.jpg"));
-                PhotoManager.AddPhoto(new Photo("Tiger Love", "Due tigri si coccolano affettuosamente, i loro corpi striati intrecciati, esprimendo un legame profondo e intimo nella natura selvaggia.", "feline_family.jpg"));
-                PhotoManager.AddPhoto(new Photo("Muddy Match", "Bambini giocano a calcio nel fango, ridendo e scivolando, mentre il pallone schizza terra e acqua in un'esplosione di gioia.", "playing_football.jpg"));
-                PhotoManager.AddPhoto(new Photo("Sandstorm Duo", "Un uomo e un cammello avanzano insieme, avvolti in una tempesta di sabbia, affrontando il deserto con determinazione e resilienza.", "sand-storm.jpg"));
-                PhotoManager.AddPhoto(new Photo("Golden Reflection", "Una solitaria spiga di grano si specchia nel lago tranquillo, creando un'immagine dorata e serena nell'acqua calma.", "schilfrohr_spiegelung_im_blauem_wasser.jpg"));
+                PhotoManager.AddPhoto(new Photo("Bajau Boy", "Un bambino bajau sorride, seduto su una piccola barca di legno, circondato dall'azzurro brillante del mare cristallino.", "bajau_boy.jpg"),new());
+                PhotoManager.AddPhoto(new Photo("Rock Splash", "Un imponente scoglio emerge dal mare, mentre onde vigorose si infrangono contro di esso, spruzzando acqua scintillante tutt'intorno.", "brandung_im_meer_an_felsen.jpg"), new());
+                PhotoManager.AddPhoto(new Photo("Cosmic Micro", "Una miriade di galassie, catturate al microscopio, si dispongono in intricate formazioni, brillando come gioielli nel vasto universo.", "das_pferd_am_himmel.jpg"), new());
+                PhotoManager.AddPhoto(new Photo("Tiger Love", "Due tigri si coccolano affettuosamente, i loro corpi striati intrecciati, esprimendo un legame profondo e intimo nella natura selvaggia.", "feline_family.jpg"), new());
+                PhotoManager.AddPhoto(new Photo("Muddy Match", "Bambini giocano a calcio nel fango, ridendo e scivolando, mentre il pallone schizza terra e acqua in un'esplosione di gioia.", "playing_football.jpg"), new());
+                PhotoManager.AddPhoto(new Photo("Sandstorm Duo", "Un uomo e un cammello avanzano insieme, avvolti in una tempesta di sabbia, affrontando il deserto con determinazione e resilienza.", "sand-storm.jpg"), new());
+                PhotoManager.AddPhoto(new Photo("Golden Reflection", "Una solitaria spiga di grano si specchia nel lago tranquillo, creando un'immagine dorata e serena nell'acqua calma.", "schilfrohr_spiegelung_im_blauem_wasser.jpg"), new());
             }
         }
         public static void SeedCategories()

@@ -29,5 +29,18 @@ namespace net_il_mio_fotoalbum.Controllers
                 return View(model);
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(PhotoFormModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                data.CreateCategories();
+                return View("Create", data);
+            }
+            PhotoManager.AddPhoto(data.Photo, data.SelectedCategories);
+            return RedirectToAction("Index");
+        }
     }
 }
