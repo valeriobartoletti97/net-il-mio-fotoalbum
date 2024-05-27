@@ -18,5 +18,16 @@ namespace net_il_mio_fotoalbum.Controllers
            List<Photo> allPhotos = PhotoManager.GetAllPhotos();
            return View(allPhotos);
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            using (PhotoContext context = new PhotoContext())
+            {
+                PhotoFormModel model = new PhotoFormModel();
+                model.Photo = new Photo();
+                model.CreateCategories();
+                return View(model);
+            }
+        }
     }
 }
