@@ -98,3 +98,12 @@ a:hover {
 button{
     border:0;
 }
+.single-photo-icons{
+    bottom:7px;
+    right:7px;
+}
+.go-back-icon{
+    position:absolute;
+    top:7px;
+    right:7px;
+}

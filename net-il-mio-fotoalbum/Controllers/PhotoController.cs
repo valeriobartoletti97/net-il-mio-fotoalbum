@@ -19,6 +19,16 @@ namespace net_il_mio_fotoalbum.Controllers
            List<Photo> allPhotos = PhotoManager.GetAllPhotos();
            return View(allPhotos);
         }
+        public IActionResult GetPhoto(int id)
+        {
+            Photo photo = PhotoManager.GetPhotoById(id);
+            if (photo == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(photo);
+        }
+
         [HttpGet]
         public IActionResult Create()
         {

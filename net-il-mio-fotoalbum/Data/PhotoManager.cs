@@ -17,7 +17,7 @@ namespace net_il_mio_fotoalbum.Data
             using PhotoContext db = new PhotoContext();
             return db.Categories.ToList();
         }
-        public static Photo GetPhoto(int id)
+        public static Photo GetPhotoById(int id)
         {
             using PhotoContext db = new PhotoContext();
             return db.Photos.FirstOrDefault(p => p.Id == id);
@@ -63,7 +63,7 @@ namespace net_il_mio_fotoalbum.Data
         public static bool DeletePhoto(int id)
         {
             using PhotoContext db = new PhotoContext();
-            var pizza = PhotoManager.GetPhoto(id);
+            var pizza = PhotoManager.GetPhotoById(id);
 
             if (pizza == null)
                 return false;
