@@ -2,6 +2,9 @@
 @model List<Category>
 
 <div class="container">
+    <div class="text-center pt-5 pb-4">
+        <h2 class="text-uppercase fw-bold">Categorie</h2>
+    </div>
     <table class="table table-hover">
         <thead>
             <tr class="text-center">
@@ -18,16 +21,6 @@
                     <td>@category.Name</td>
                     <td>
                         <div class="d-flex justify-content-center align-items-center gap-2">
-                            <span>
-                                <a href="@Url.Action("GetCategory", "Category", new { id = category.Id})">
-                                    <i class="fa-solid fa-eye show-icon"></i>
-                                </a>
-                            </span>
-                            <span>
-                                <a href="@Url.Action("Update", "Category", new { id = category.Id})">
-                                    <i class="fa-solid fa-pen update-icon"></i>
-                                </a>
-                            </span>
                             <div class="delete-pizza-btn">
                                 <form asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" method="post">
                                     @Html.AntiForgeryToken()

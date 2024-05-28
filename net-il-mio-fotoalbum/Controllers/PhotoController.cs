@@ -3,6 +3,7 @@ using net_il_mio_fotoalbum.Models;
 using System.Diagnostics;
 using net_il_mio_fotoalbum.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Hosting;
 
 namespace net_il_mio_fotoalbum.Controllers
 {
@@ -29,6 +30,7 @@ namespace net_il_mio_fotoalbum.Controllers
             return View(photo);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -41,6 +43,7 @@ namespace net_il_mio_fotoalbum.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(PhotoFormModel data)
@@ -54,6 +57,7 @@ namespace net_il_mio_fotoalbum.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Update(int id)
         {
@@ -65,6 +69,7 @@ namespace net_il_mio_fotoalbum.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Update(int id, PhotoFormModel data)
@@ -84,7 +89,8 @@ namespace net_il_mio_fotoalbum.Controllers
                 return NotFound();
         }
 
-            [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {

@@ -1,0 +1,85 @@
+﻿<div class="text-center pt-5 pb-4">
+    <h2 class="text-uppercase fw-bold">Galleria</h2>
+</div>
+<div class="container pt-2" id="main-api-content">
+    <div class="row">
+        <div class="col mb-5">
+            <input type="text" class="search-by-name text-center form-control" placeholder="Cerca per Titolo" />
+        </div>
+        <div class="col text-black-center text-uppercase text-black d-none no-photo-founded">
+            <h3>Non è stata trovata nessuna foto</h3>
+        </div>
+    </div>
+    <div class="container pt-2" id="main-content">
+        <div class="row justify-cointent-center photo-card-wrapper">
+            @* Qui vengono stampate le card delle foto *@
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    const baseApiUrl = "api/PhotoApi/";
+
+    function loadAllPhotos(title)
+    {
+        axios.get(`${baseApiUrl}GetPhotos`,
+        {
+            params:
+            {
+                title: title
+            }
+        }).then((response) => {
+            if (response.data.length == 0)
+            {
+                document.querySelector('.no-photo-founded').classList.remove('d-none');
+                document.querySelector('.photo-card-wrapper').classList.add('d-none');
+            }
+            else {
+                document.querySelector('.no-photo-founded').classList.add('d-none');
+                let photoWrapper = document.querySelector('.photo-card-wrapper');
+                photoWrapper.classList.remove('d-none');
+
+                photoWrapper.innerHTML = '';
+                response.data.forEach((photo) => {
+                    console.log(photo);
+                        photoWrapper.innerHTML += `
+                                <div class="col-md-4 mb-3 d-flex">
+                                    <div class="card photo-card flex-fill position-relative">
+                                        <div class="photo-wrapper">
+                                            <a href="@Url.Action("GetPhoto", "Gallery")">
+                                                <img src="/img/${photo.image}" alt="${photo.title}" class="photo-img" />
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <h3 class="text-center photo-title py-1">${photo.title}</h3>
+                                            <p class="text-center my-4">${photo.description} </p>
+                                            <div class="d-flex justify-content-center gap-1">
+                                                <span>
+                                                    <a href="@Url.Action("GetPhoto", "Gallery")">
+                                                        <i class="fa-solid fa-eye show-icon"></i>
+                                                    </a>
+                                                </span>
+                                            </div>
+                                         </div>
+                                    </div>
+                                </div>
+                        `;
+                });
+            }
+        });
+    }
+    function searchPhoto()
+    {
+        console.log(this.value);
+        loadAllPhotos(this.value)
+    }
+
+    //richiamo la funzione
+    loadAllPhotos('')
+
+    //ogni volta che scrivo una lettera nella barra di ricerca viene chiamata la funzione di filtraggio loadAllPhotos attraerso la searchPhoto
+    document.querySelector('.search-by-name').addEventListener('keyup', searchPhoto)
+</script>

@@ -12,6 +12,11 @@ namespace net_il_mio_fotoalbum.Data
             using PhotoContext db = new PhotoContext();
             return db.Photos.Include(p => p.Categories).ToList();
         }
+        public static List<Photo> GetAllPublicPhotos()
+        {
+            using PhotoContext db = new PhotoContext();
+            return db.Photos.Where(p => p.IsVisible).Include(p => p.Categories).ToList();
+        }
         public static List<Category> GetAllCategories()
         {
             using PhotoContext db = new PhotoContext();
