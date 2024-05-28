@@ -55,6 +55,20 @@ namespace net_il_mio_fotoalbum.Data
             db.SaveChanges();
         }
 
+        public static bool DeleteCategory(int id)
+        {
+            using PhotoContext db = new PhotoContext();
+            var category = PhotoManager.GetCategoryById(id);
+
+            if (category == null)
+                return false;
+
+            db.Categories.Remove(category);
+            db.SaveChanges();
+
+            return true;
+        }
+
         public static int CountAllPhotos() 
         {
             using PhotoContext db = new PhotoContext();

@@ -37,5 +37,16 @@ namespace net_il_mio_fotoalbum.Controllers
             PhotoManager.AddCategory(data.Name);
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult Delete(int id)
+        {
+            if (PhotoManager.DeleteCategory(id))
+                return RedirectToAction("Index");
+            else
+                return NotFound();
+        }
     }
 }
