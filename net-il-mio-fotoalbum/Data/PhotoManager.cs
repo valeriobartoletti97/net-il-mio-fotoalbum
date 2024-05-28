@@ -22,6 +22,12 @@ namespace net_il_mio_fotoalbum.Data
             using PhotoContext db = new PhotoContext();
             return db.Photos.Where(p => p.Id == id).Include(p => p.Categories).FirstOrDefault();
         }
+
+        public static Category GetCategoryById(int id)
+        {
+            using PhotoContext db = new PhotoContext();
+            return db.Categories.FirstOrDefault(p => p.Id == id);
+        }
         public static void AddPhoto(Photo photo, List<string> selectedCategories)
         {
             using PhotoContext db = new PhotoContext();

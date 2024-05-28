@@ -17,5 +17,25 @@ namespace net_il_mio_fotoalbum.Controllers
             List<Category> allCategories = PhotoManager.GetAllCategories();
             return View(allCategories);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            Category category = new Category();
+            return View(category);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Category data)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Create", data);
+            }
+            PhotoManager.AddCategory(data.Name);
+            return RedirectToAction("Index");
+        }
     }
 }

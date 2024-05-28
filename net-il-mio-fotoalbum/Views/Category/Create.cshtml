@@ -1,0 +1,19 @@
+﻿@using net_il_mio_fotoalbum.Data;
+@model Category
+
+<div class="container pt-5">
+    <form asp-controller="Category" asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div class="mb-3">
+            <strong>Nome Categoria:</strong>
+            <input asp-for="@Model.Name" class="d-block w-100 form-control" />
+            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+        </div>
+        <div class="text-end d-flex justify-content-end">
+            <input type="submit" class="btn btn-small btn-light me-2" value="Inserisci">
+            <button class="btn btn-small btn-light">
+                <a href="@Url.Action("Index")"> Indietro </a>
+            </button>
+        </div>
+    </form>
+</div>
