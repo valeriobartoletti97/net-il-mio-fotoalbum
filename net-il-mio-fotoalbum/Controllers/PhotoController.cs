@@ -54,6 +54,17 @@ namespace net_il_mio_fotoalbum.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            Photo photoToEdit = PhotoManager.GetPhotoById(id);
+            if (photoToEdit == null)
+                return NotFound();
+            PhotoFormModel model = new PhotoFormModel(photoToEdit);
+            model.CreateCategories();
+            return View(model);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
