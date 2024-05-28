@@ -29,6 +29,13 @@
                 </div>
             }
         </div>
+        <div class="mb-3">
+            <strong>Visibilità:</strong>
+            <select asp-for="@Model.Photo.IsVisible" class="form-control" rows="10" class="d-block w-100">
+                <option value="true" selected>Pubblica</option>
+                <option value="false">Privata</option>
+            </select>
+        </div>
         <div class="text-end d-flex justify-content-end">
             <input type="submit" class="btn btn-small btn-light me-2" value="Inserisci">
             <button class="btn btn-small btn-light">

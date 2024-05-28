@@ -67,6 +67,25 @@ namespace net_il_mio_fotoalbum.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public IActionResult Update(int id, PhotoFormModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                data.CreateCategories();
+                return View("Update", data);
+            }
+            var modified = PhotoManager.UpdatePhoto(id, data.Photo, data.SelectedCategories);
+            if (modified)
+            {
+                // Richiamiamo la action Index affinché vengano mostrate tutte le pizze
+                return RedirectToAction("Index");
+            }
+            else
+                return NotFound();
+        }
+
+            [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             if (PhotoManager.DeletePhoto(id))

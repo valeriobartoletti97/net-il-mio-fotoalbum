@@ -20,7 +20,7 @@ namespace net_il_mio_fotoalbum.Data
         public static Photo GetPhotoById(int id)
         {
             using PhotoContext db = new PhotoContext();
-            return db.Photos.FirstOrDefault(p => p.Id == id);
+            return db.Photos.Where(p => p.Id == id).Include(p => p.Categories).FirstOrDefault();
         }
         public static void AddPhoto(Photo photo, List<string> selectedCategories)
         {
@@ -60,6 +60,38 @@ namespace net_il_mio_fotoalbum.Data
             return db.Categories.Count();
         }
       
+        public static bool UpdatePhoto(int id, Photo photo, List<string> selectedCategories)
+        {
+            try
+            {
+                using PhotoContext db = new PhotoContext();
+                var photoModificata = db.Photos.Where(p => p.Id == id).Include(p => p.Categories).FirstOrDefault();
+                if (photoModificata == null)
+                    return false;
+                photoModificata.Title = photo.Title;
+                photoModificata.Description = photo.Description;
+                photoModificata.Image = photo.Image;
+                photoModificata.IsVisible = photo.IsVisible;
+                photoModificata.Categories.Clear();
+                if (selectedCategories != null)
+                {
+                    foreach (var category in selectedCategories)
+                    {
+                        int categoryId = int.Parse(category);
+                        var categoryFromDb = db.Categories.FirstOrDefault(x => x.Id == categoryId);
+                        if (categoryFromDb != null)
+                            photoModificata.Categories.Add(categoryFromDb);
+                    }
+                }
+
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         public static bool DeletePhoto(int id)
         {
             using PhotoContext db = new PhotoContext();
