@@ -4,11 +4,17 @@
             <h1 class="text-uppercase fw-bolder text-center">IPhoto</h1>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                     <li class="nav-item text-uppercase">
-                        <a class="nav-link active" aria-current="page" href="@Url.Action("Index", "Photo")">Foto</a>
-                    </li>
+                    @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                    {
+                        <li class="nav-item text-uppercase">
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("Index", "Gallery")">Galleria</a>
+                        </li>
+                    }
                     @if (User.IsInRole("Admin"))
                     {
+                        <li class="nav-item text-uppercase">
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("Index", "Photo")">Gestisci Foto</a>
+                        </li>
                         <li class="nav-item text-uppercase me-5">
                             <a class="nav-link active" aria-current="page" href="@Url.Action("Index", "Category")">Categorie</a>
                         </li>

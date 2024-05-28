@@ -30,21 +30,24 @@
                                 }
                             </div>
                             <div class="single-photo-icons position-absolute">
-                                <div class="d-flex align-items-center">
-                                    <div class="d-flex gap-1">
-                                        <span>
-                                            <a href="@Url.Action("Update", "Photo", new { id = Model.Id})">
-                                                <i class="fa-solid fa-pen update-icon"></i>
-                                            </a>
-                                        </span>
-                                        <form asp-controller="Photo" asp-action="Delete" asp-route-id="@Model.Id" method="post">
-                                            @Html.AntiForgeryToken()
-                                            <button type="submit">
-                                                <i class="fa-solid fa-trash delete-icon"></i>
-                                            </button>
-                                        </form>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex gap-1">
+                                            <span>
+                                                <a href="@Url.Action("Update", "Photo", new { id = Model.Id})">
+                                                    <i class="fa-solid fa-pen update-icon"></i>
+                                                </a>
+                                            </span>
+                                            <form asp-controller="Photo" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit">
+                                                    <i class="fa-solid fa-trash delete-icon"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             </div>
                             <span class="d-block">
                                 <a href="@Url.Action("Index")">

@@ -49,7 +49,7 @@
                                 <div class="col-md-4 mb-3 d-flex">
                                     <div class="card photo-card flex-fill position-relative">
                                         <div class="photo-wrapper">
-                                            <a href="@Url.Action("GetPhoto", "Gallery")">
+                                                <a href="@Url.Action("GetPhoto", "Photo")?Id=${photo.id}">
                                                 <img src="/img/${photo.image}" alt="${photo.title}" class="photo-img" />
                                             </a>
                                         </div>
@@ -58,7 +58,7 @@
                                             <p class="text-center my-4">${photo.description} </p>
                                             <div class="d-flex justify-content-center gap-1">
                                                 <span>
-                                                    <a href="@Url.Action("GetPhoto", "Gallery")">
+                                                            <a href="@Url.Action("GetPhoto", "Photo")?Id=${photo.id}">
                                                         <i class="fa-solid fa-eye show-icon"></i>
                                                     </a>
                                                 </span>
