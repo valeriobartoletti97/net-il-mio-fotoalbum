@@ -1,0 +1,45 @@
+﻿@using net_il_mio_fotoalbum.Data
+@model List<Category>
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr class="text-center">
+                <th scope="col">Id</th>
+                <th scope="col text-center">Nome</th>
+                <th scope="col text-center">Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model)
+            {
+                <tr class="text-center">
+                    <th scope="row">@category.Id</th>
+                    <td>@category.Name</td>
+                    <td>
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+                            <span>
+                                <a href="@Url.Action("GetCategory", "Category", new { id = category.Id})">
+                                    <i class="fa-solid fa-eye show-icon"></i>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="@Url.Action("Update", "Category", new { id = category.Id})">
+                                    <i class="fa-solid fa-pen update-icon"></i>
+                                </a>
+                            </span>
+                            <div class="delete-pizza-btn">
+                                <form asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit">
+                                        <i class="fa-solid fa-trash delete-icon"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
