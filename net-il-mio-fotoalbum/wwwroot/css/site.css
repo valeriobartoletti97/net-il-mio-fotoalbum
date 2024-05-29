@@ -13,10 +13,12 @@
     --orange: #F09B23;
 }
 
-footer {
-  
+main{
+    min-height: 70vh;
 }
-
+.home-container{
+    padding-top: 18vh;
+}
 .social-icons > i {
     font-size: 1.3em;
     transition: 0,5s;
@@ -170,4 +172,7 @@ h1,h2,h3,h4,h5{
 .close-alert{
     top:3px;
     right: 5px;
+}
+nav.navbar, footer{
+    background-color:var(--gray) !important;
 }
