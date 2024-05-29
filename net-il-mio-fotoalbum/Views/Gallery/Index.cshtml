@@ -80,9 +80,9 @@
                                 <div class="col-md-4 mb-3 d-flex">
                                     <div class="card photo-card flex-fill position-relative">
                                         <div class="photo-wrapper">
-                                                <a href="@Url.Action("GetPhoto", "Photo")?Id=${photo.id}">
-                                                <img src="/img/${photo.image}" alt="${photo.title}" class="photo-img" />
-                                            </a>
+                                             <a href="@Url.Action("GetPhoto", "Photo")?Id=${photo.id}">
+                                                   ${photo.image ? `<img src="/img/${photo.image}" alt="${photo.title}" class="photo-img" />` : `<img src="${photo.imgSrc}" alt="${photo.title}" class="photo-img" />`}
+                                             </a>
                                         </div>
                                         <div class="card-body">
                                             <h3 class="text-center photo-title py-1">${photo.title}</h3>
