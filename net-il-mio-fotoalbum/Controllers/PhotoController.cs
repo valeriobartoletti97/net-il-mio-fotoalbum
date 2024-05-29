@@ -53,6 +53,7 @@ namespace net_il_mio_fotoalbum.Controllers
                 data.CreateCategories();
                 return View("Create", data);
             }
+            data.SetImageFileFromFormFile();
             PhotoManager.AddPhoto(data.Photo, data.SelectedCategories);
             return RedirectToAction("Index");
         }
@@ -79,7 +80,8 @@ namespace net_il_mio_fotoalbum.Controllers
                 data.CreateCategories();
                 return View("Update", data);
             }
-            var modified = PhotoManager.UpdatePhoto(id, data.Photo, data.SelectedCategories);
+            var img = data.SetImageFileFromFormFile();
+            var modified = PhotoManager.UpdatePhoto(id, data.Photo, data.SelectedCategories,img);
             if (modified)
             {
                 // Richiamiamo la action Index affinché vengano mostrate tutte le pizze

@@ -9,11 +9,26 @@
                 <!--Card Photo-->
                 <div class="col-12">
                     <div class="single-photo-card py-4 row">
-                        <div class="col-10 col-md-4 px-3">
+                        @* <div class="col-10 col-md-4 px-3">
                             <div class="single-photo-box">
                                 <img src="~/img/@Model.Image" alt="@Model.Title" class="photo-img">
                             </div>
-                        </div>
+                        </div> *@
+                        @if(Model.ImgSrc != null)
+                        {
+                            <div class="col-10 col-md-4 px-3">
+                                <div class="single-photo-box">
+                                    @if (@Model.Image != null)
+                                    {
+                                        <img src="~/img/@Model.Image" alt="@Model.Title" class="photo-img" />
+                                    }
+                                    else
+                                    {
+                                        <img src="@Model.ImgSrc" alt="@Model.Title" class="@Model-img" />
+                                    }
+                                </div>
+                            </div>
+                        }
                         <div class=" px-4 col-12 col-md-8 col-lg-6 position-relative">
                             <div class="photo-description px-3 pt-2">
                                 <h3 class="text-uppercase">@Model.Title</h3>

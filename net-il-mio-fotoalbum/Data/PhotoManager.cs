@@ -85,7 +85,7 @@ namespace net_il_mio_fotoalbum.Data
             return db.Categories.Count();
         }
       
-        public static bool UpdatePhoto(int id, Photo photo, List<string> selectedCategories)
+        public static bool UpdatePhoto(int id, Photo photo, List<string> selectedCategories, byte[]? img = null)
         {
             try
             {
@@ -93,9 +93,12 @@ namespace net_il_mio_fotoalbum.Data
                 var photoModificata = db.Photos.Where(p => p.Id == id).Include(p => p.Categories).FirstOrDefault();
                 if (photoModificata == null)
                     return false;
+                if(img != null)
+                {
+                    photoModificata.ImageFile = img;
+                }
                 photoModificata.Title = photo.Title;
                 photoModificata.Description = photo.Description;
-                photoModificata.Image = photo.Image;
                 photoModificata.IsVisible = photo.IsVisible;
                 photoModificata.Categories.Clear();
                 if (selectedCategories != null)

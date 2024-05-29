@@ -11,11 +11,12 @@ namespace net_il_mio_fotoalbum.Models
         public string Title { get; set; }
         [Required]
         public string Description { get; set; }
-        [Required]
-        public string Image { get; set; }
+        public string? Image { get; set; }
 
         public bool IsVisible { get; set; } = true;
         public List<Category>? Categories { get; set; }
+        public byte[]? ImageFile { get; set; }
+        public string ImgSrc => ImageFile != null ? $"data:image/png;base64,{Convert.ToBase64String(ImageFile)}" : "";
 
         public Photo()
         {
