@@ -75,7 +75,7 @@ a:hover {
 
 
 .show-icon, .update-icon {
-    background-color: white;
+    background-color: #fff8e6;
     color: black;
 }
 
@@ -92,7 +92,7 @@ a:hover {
 }
 
 .delete-icon {
-    background-color: white;
+    background-color: #fff8e6;
     color: black;
 }
 button{
@@ -102,10 +102,11 @@ button{
     bottom:7px;
     right:7px;
 }
-.go-back-icon{
+.go-back-icon {
+    background-color: #fff8e6;
     position:absolute;
-    top:7px;
-    right:7px;
+    top: 7px;
+    right: 7px;
 }
 .private-photo-badge{
     top: 7px;

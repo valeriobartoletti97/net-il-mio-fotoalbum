@@ -72,7 +72,14 @@
                             }
                             <div class="photo-wrapper">
                                 <a href="@Url.Action("GetPhoto", "Photo", new { id = photo.Id})">
-                                    <img src="~/img/@photo.Image" alt="photo.Name" class="photo-img" />
+                                    @if (@photo.Image != null)
+                                    {
+                                        <img src="~/img/@photo.Image" alt="@photo.Title" class="photo-img" />
+                                    }
+                                    else
+                                    {
+                                        <img src="@photo.ImgSrc" alt="@photo.Title" class="photo-img" />
+                                    }
                                 </a>
                             </div>
                             <div class="card-body">

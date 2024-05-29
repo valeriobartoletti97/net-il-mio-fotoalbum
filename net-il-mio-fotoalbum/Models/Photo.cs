@@ -8,8 +8,11 @@ namespace net_il_mio_fotoalbum.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [StringLength(30, MinimumLength = 3, ErrorMessage = "Il titolo deve essere compreso tra 3 e 30 caratteri")]
         public string Title { get; set; }
         [Required]
+        [StringLength(100000, MinimumLength = 5, ErrorMessage = "La descrizione deve essere compresa tra 5 e 10000 caratteri")]
+
         public string Description { get; set; }
         public string? Image { get; set; }
 
