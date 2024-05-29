@@ -10,6 +10,12 @@
             <h3>Non è stata trovata nessuna foto</h3>
         </div>
     </div>
+    <div class="row">
+        <div class="col alert alert-success text-center position-relative d-none" role="alert">
+            <h4 class="alert-heading">Il tuo messaggio è stato inviato con successo!</h4>
+            <i class="fa-solid fa-xmark close-alert position-absolute" onclick="closeAlert()"></i>
+        </div>
+    </div>
     <div class="container pt-2" id="main-content">
         <div class="row justify-cointent-center photo-card-wrapper">
             @* Qui vengono stampate le card delle foto *@
@@ -17,16 +23,30 @@
     </div>
 </div>
 
-<button class="button-55 off-canvas position-fixed" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Invia un messaggio</button>
+<button class="button-55 off-canvas position-fixed" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="closeAlert()">Invia un messaggio</button>
 
-<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <p>Try scrolling the rest of the page to see this option in action.</p>
-    </div>
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Messaggio</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form onsubmit="createMsg(event)" method="post" id="my-form">
+                <div class="mb-3">
+                    <strong>Email:</strong>
+                    <input id="msg-email" type="email" class="d-block w-100 form-control" />
+                </div>
+                <div class="mb-3">
+                    <strong>Messaggio:</strong>
+                    <textarea id="msg-text" class="d-block w-100 form-control" cols="75" rows="10"></textarea>
+                </div>
+                <div class=" d-flex justify-content-start">
+                    <input type="submit" class="btn btn-small btn-light" value="Invia" />
+                </div>
+            </form>
+        </div>
+}
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -81,6 +101,32 @@
                 });
             }
         });
+    }
+
+    function createMsg(evt) {
+        evt.preventDefault();
+        let offcanvas = document.querySelector('.offcanvas');
+        let email = document.getElementById('msg-email');
+        let text = document.getElementById('msg-text');
+        let alert = document.querySelector('.alert-success');
+        alert.classList.add('d-none');
+      
+        axios.post('/api/MessageApi/SendMessage', {
+            email: email.value,
+            text: text.value,
+        })
+            .then(function (response) {
+                console.log(response);
+                alert.classList.remove('d-none');
+                document.getElementById("my-form").reset();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    function closeAlert(){
+        let alert = document.querySelector('.alert-success');
+        alert.classList.add('d-none');
     }
     function searchPhoto()
     {

@@ -163,3 +163,10 @@ h1,h2,h3,h4,h5{
 .button-55:focus {
     box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
 }
+.offcanvas{
+    width: 500px !important    
+}
+.close-alert{
+    top:3px;
+    right: 5px;
+}
